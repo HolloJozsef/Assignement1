@@ -2,5 +2,6 @@ package dao;
 
 public interface Dao<T> {
     void insert(T objectToInsert);
-    void remove(T objectToRemove);
+    void delete(T objectToRemove);
+    void update(T objectToRemove);
 }

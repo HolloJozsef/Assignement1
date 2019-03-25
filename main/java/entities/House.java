@@ -8,10 +8,10 @@ import javax.persistence.*;
 public class House {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name= "idadresa",nullable = false)
+        @Column(name= "idcasa",nullable = false)
         private int idadresa;
 
-         @Column(name= "idproprietar")
+         @Column(name= "iduser")
          private int idclient;
 
         @Column(name="adresa")

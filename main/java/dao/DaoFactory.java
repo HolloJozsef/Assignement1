@@ -29,7 +29,9 @@ public abstract class DaoFactory {
 
         public abstract UserDao getUserDao();
 
-
-
         public abstract AdminDao getAdminDao();
+
+      public abstract HouseDao getHouseDao();
+
+      public abstract RequestDao getRequestDao();
 }

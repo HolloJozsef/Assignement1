@@ -2,8 +2,6 @@ package dao.jdbc;
 
 import dao.UserDao;
 import dao.connectionFactory;
-import entities.House;
-import entities.Request;
 import entities.User;
 
 import java.sql.Connection;
@@ -27,7 +25,7 @@ public class JdbcUserDao implements UserDao {
             }
     }
     @Override
-    public void remove(User objectToDelete) {
+    public void delete(User objectToDelete) {
         try{
             Connection connection = connectionFactory.getConnection();
             PreparedStatement pstmt=connection.prepareStatement("DELETE FROM `client` VALUES (?,?,?)");
@@ -59,54 +57,7 @@ public class JdbcUserDao implements UserDao {
        }
         return user;
     }
-    public void addRequest(Request requestToInsert) {
-        Connection dbConnection = connectionFactory.getConnection();
-        PreparedStatement findStatement = null;
-        try {
-            findStatement = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO request VALUES (?,?, ?)");
-            findStatement.setInt(1, requestToInsert.getIdcerere());
-            findStatement.setInt(2,requestToInsert.getIdcasa());
-            findStatement.setString(3,requestToInsert.getRequestType());
-            findStatement.executeUpdate();
-        } catch (SQLException e) {
 
-        }
-    }
-    public void addHouse(House house){
-        Connection dbConnection = connectionFactory.getConnection();
-        PreparedStatement findStatement = null;
-        try {
-            findStatement = (PreparedStatement) dbConnection.prepareStatement("INSERT INTO house VALUES (?,?, ?)");
-            findStatement.setInt(1, house.getIdadresa());
-            findStatement.setInt(3,house.getIdclient());
-            findStatement.setString(2,house.getAdresa());
-            findStatement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
-    }
-    public void removeHouse(House house){
-        Connection dbConnection = connectionFactory.getConnection();
-        PreparedStatement findStatement = null;
-        try {
-            findStatement = (PreparedStatement) dbConnection.prepareStatement("DELETE FROM house WHERE idproprietar=?");
-            findStatement.setInt(1,house.getIdclient());
-            findStatement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
-    }
-    public void removeRequest(Request request){
-        Connection dbConnection = connectionFactory.getConnection();
-        PreparedStatement findStatement = null;
-        try {
-            findStatement = (PreparedStatement) dbConnection.prepareStatement("DELETE FROM request WHERE idcasa=?");
-            findStatement.setInt(1,request.getIdcasa());
-            findStatement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
-    }
     public int verifyNumberOfRequests(int houseId){
       int result=0;
         try {
@@ -128,5 +79,17 @@ public class JdbcUserDao implements UserDao {
         }
         return result;
     }
+   public void update(User userToUpdate){
+       Connection dbConnection = connectionFactory.getConnection();
+       PreparedStatement findStatement = null;
+       try {
+           findStatement = (PreparedStatement) dbConnection.prepareStatement("UPDATE user WHERE iduser=?");
+           findStatement.setInt(1,userToUpdate.getId());
+           findStatement.executeUpdate();
+       } catch (SQLException e) {
+
+       }
+    }
+
 }
 

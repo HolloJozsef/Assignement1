@@ -18,7 +18,7 @@ public class ShowUserDetails {
             throw new IllegalArgumentException("Numar prea mare de case!");
         }
         else
-            System.out.println("Numarul de case este"+result);
+            System.out.println("Numarul de case este "+result);
     }
 
 }
