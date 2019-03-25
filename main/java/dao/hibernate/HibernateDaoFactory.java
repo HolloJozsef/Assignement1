@@ -1,16 +1,15 @@
 package dao.hibernate;
 
-import dao.DaoFactory;
-import dao.HouseDao;
-import dao.UserDao;
+import dao.*;
 
 public class HibernateDaoFactory extends DaoFactory {
     @Override
     public UserDao getUserDao(){
         return new HibernateUserDao();
     }
+
+
     @Override
-    public HouseDao getHouseDao(){
-        return new HibernateHouseDao();
+    public AdminDao getAdminDao(){ return new HibernateAdminDao();
     }
 }

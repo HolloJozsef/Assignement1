@@ -1,14 +1,14 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="request")
 public class Request {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idcerere")
+    private int idcerere;
     @Column(name="tip")
     private String requestType;
     @Column(name="idcasa")
@@ -33,6 +33,18 @@ public class Request {
     public Request(String requestType, int idcasa) {
         this.requestType = requestType;
         this.idcasa = idcasa;
+    }
+    public Request(String requestType, int idcasa,int idcerere) {
+        this.requestType = requestType;
+        this.idcasa = idcasa;
+        this.idcerere=idcerere;
+    }
+    public int getIdcerere() {
+        return idcerere;
+    }
+
+    public void setIdcerere(int idcerere) {
+        this.idcerere = idcerere;
     }
 
     @Override

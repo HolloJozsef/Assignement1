@@ -12,9 +12,9 @@ public class Admin {
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name="idAdmin")
     private int idAdmin;
-@Column(name="email")
+    @Column(name="email")
     private String email;
-@Column(name="password")
+    @Column(name="password")
     private String password;
 
     public int getIdAdmin() {

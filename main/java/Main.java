@@ -1,23 +1,21 @@
 import business.ShowUserDetails;
+import dao.AdminDao;
 import dao.DaoFactory;
+import dao.UserDao;
 import dao.hibernate.util.HibernateUtil;
 import entities.House;
 import entities.User;
-
+import entities.Request;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static final int USER_ID = 1;
     public static void main(String[] args) throws IOException {
         DaoFactory daoFactory = DaoFactory.getInstance(DaoFactory.Type.HIBERNATE);
         insertInitialData(daoFactory);
-        ShowUserDetails transactionScript = new ShowUserDetails(daoFactory, USER_ID);
-        User execute = transactionScript.execute();
-        if (execute != null) {
-            System.out.println("User" + execute.toString());
-
-
-        }
+        ShowUserDetails transactionScript = new ShowUserDetails(daoFactory, 1);
+        transactionScript.execute();
         System.in.read();
         HibernateUtil.getSessionFactory().close();
     }
@@ -27,10 +25,23 @@ public class Main {
         human.setEmail("human@gmail.com");
         human.setId(USER_ID);
         human.setPass("12322224");
-        House casa=new House("TESTCASAMAIN",human);
         daoFactory.getUserDao().insert(human);
-        daoFactory.getHouseDao().insert(casa);
-        human.addHouse(casa);
+        UserDao userDao = daoFactory.getUserDao();
+       // User user=userDao.findUser(1);
+        userDao.addRequest(new Request("dinUser",3,777));
+
+        userDao.addHouse(new House("cevaNume",1,5));
+        userDao.addRequest(new Request("cerere1",1));
+        AdminDao adminDao=daoFactory.getAdminDao();
+        List<User> clieti=adminDao.showAllUsers();
+        System.out.println(clieti.toString()+"from showAllUsers method");
+        adminDao.addRequest(new Request("adeverinta",3,3));
+        //   adminDao.deleteRequest(new Request("cerere1",1,1));
+        adminDao.addRequest(new Request("adeverinta2",3,78));
+
+        adminDao.addRequest(new Request("adeverinta3",3,213));
+        System.out.println(adminDao.showAllRequest().toString());
+       // human.addHouse(casa);
     }
 
 
